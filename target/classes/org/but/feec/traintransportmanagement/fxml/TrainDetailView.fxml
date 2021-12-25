@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="318.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane layoutX="22.0" layoutY="22.0" prefHeight="250.0" prefWidth="549.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.39996337890625" minWidth="10.0" prefWidth="100.5999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.4000244140625" minWidth="10.0" prefWidth="449.4000244140625" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="66.0" minHeight="40.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="57.0" minHeight="40.0" prefHeight="57.0" />
+                <RowConstraints maxHeight="80.0" minHeight="32.0" prefHeight="52.0" />
+                <RowConstraints maxHeight="57.0" minHeight="0.0" prefHeight="28.0" />
+                <RowConstraints maxHeight="57.0" minHeight="0.0" prefHeight="0.0" />
+                <RowConstraints maxHeight="40.0" minHeight="6.0" prefHeight="6.0" />
+            </rowConstraints>
+            <children>
+                <Label text="Train ID">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label text="Train name" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label text="Train speed" GridPane.rowIndex="2">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label text="Train type" GridPane.rowIndex="3">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <Label text="Depo name" GridPane.rowIndex="4">
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <TextField fx:id="trainIdTextField" GridPane.columnIndex="1" />
+                <TextField fx:id="trainNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="trainSpeedTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="trainTypeTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="depoNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Depo size" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                    <padding>
+                        <Insets left="5.0" />
+                    </padding>
+                </Label>
+                <TextField fx:id="depoSizeTextField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+        </GridPane>
+    </children>
+
+</AnchorPane>
