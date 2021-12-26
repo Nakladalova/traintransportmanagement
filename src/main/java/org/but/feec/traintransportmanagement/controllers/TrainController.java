@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.but.feec.traintransportmanagement.config.DataSourceConfig;
+import org.but.feec.traintransportmanagement.exceptions.DataAccessException;
 import org.but.feec.traintransportmanagement.exceptions.ExceptionHandler;
 import javafx.stage.Stage;
 import org.but.feec.traintransportmanagement.App;
@@ -21,12 +23,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class TrainController {
 
     private static final Logger logger = LoggerFactory.getLogger(TrainController.class);
 
+    ObservableList<String>columnNamesList = FXCollections.observableArrayList("Train name", "Speed", "Type");
     @FXML
     private TableView<TrainBasicView> systemTrainTableView;
     @FXML
@@ -41,6 +48,17 @@ public class TrainController {
     private Button refreshButton;
     @FXML
     public Button addTrainButton;
+    @FXML
+    public Button findUser;
+    @FXML
+    public ComboBox trainColumnsComboBox;
+    @FXML
+    public TextField valueTextField;
+    @FXML
+    public Button filterButton;
+    @FXML
+    public Button resetFilterButton;
+
 
 
     private TrainRepository trainRepository;
@@ -55,6 +73,8 @@ public class TrainController {
         trainRepository = new TrainRepository();
         trainService = new TrainService(trainRepository);
 
+        trainColumnsComboBox.getItems().removeAll(trainColumnsComboBox.getItems());
+        trainColumnsComboBox.setItems(columnNamesList);
         trainsId.setCellValueFactory(new PropertyValueFactory<TrainBasicView, Long>("id"));
         trainsName.setCellValueFactory(new PropertyValueFactory<TrainBasicView, String>("trainName"));
         trainsSpeed.setCellValueFactory(new PropertyValueFactory<TrainBasicView, String>("speed"));
@@ -135,7 +155,12 @@ public class TrainController {
     }
 
     private ObservableList<TrainBasicView> initializeTrainsData() {
-        List<TrainBasicView> trains = trainService.getTrainBasicView();
+        String selectedItem= (String)trainColumnsComboBox.getSelectionModel().getSelectedItem();
+        String value= valueTextField.getText();
+        if (selectedItem == "None") {
+            value = null;
+        }
+        List<TrainBasicView> trains = trainService.getTrainBasicView(selectedItem, value);
         return FXCollections.observableArrayList(trains);
     }
 
@@ -146,21 +171,47 @@ public class TrainController {
         vutLogo.setFitHeight(50);
     }
 
+    public void filterData(){
+        ObservableList<TrainBasicView> observableTrainsList = initializeTrainsData();
+        systemTrainTableView.setItems(observableTrainsList);
+        systemTrainTableView.refresh();
+        systemTrainTableView.sort();
+    }
+
+    @FXML
+    public void handlefilterButton(ActionEvent event) {
+        filterData();
+    }
+
+    @FXML
+    public void handleResetfilterButton(ActionEvent event) {
+        trainColumnsComboBox.getSelectionModel().select("None");
+        valueTextField.clear();
+        filterData();
+    }
+
     public void handleAddTrainButton(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("fxml/TrainCreate.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("fxml/FindUser.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS JavaFX Create Train");
+            stage.setTitle("BDS JavaFX Find User");
             stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ExceptionHandler.handleException(ex);
+        }
+    }
 
-//            Stage stageOld = (Stage) signInButton.getScene().getWindow();
-//            stageOld.close();
-//
-//            stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
-//            authConfirmDialog();
-
+    public void handleFindUserButton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(App.class.getResource("fxml/FindUserId.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            Stage stage = new Stage();
+            stage.setTitle("BDS JavaFX User");
+            stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
             ExceptionHandler.handleException(ex);
@@ -169,9 +220,6 @@ public class TrainController {
 
     @FXML
     protected void onRefreshButtonClick(ActionEvent event) {
-        ObservableList<TrainBasicView> observableTrainsList = initializeTrainsData();
-        systemTrainTableView.setItems(observableTrainsList);
-        systemTrainTableView.refresh();
-        systemTrainTableView.sort();
+        filterData();
     }
 }

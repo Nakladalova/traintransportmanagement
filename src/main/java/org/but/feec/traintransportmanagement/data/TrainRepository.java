@@ -13,16 +13,26 @@ import java.util.List;
 
 public class TrainRepository {
 
-    public List<TrainBasicView> getTrainBasicView() {
+    public List<TrainBasicView> getTrainBasicView(String aColumn, String aValue) {
+        String sqltext = "SELECT id, train_name, speed, type FROM public.train ";
+        if (!aColumn.equals("None")) {
+            sqltext += aColumn;
+            sqltext += " = ?";
+        }
+        sqltext += " ORDER BY id ASC";
+
         try (Connection connection = DataSourceConfig.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT id, train_name, speed, type FROM public.train ORDER BY id ASC");
-             ResultSet resultSet = preparedStatement.executeQuery();) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqltext)){
+            if (!aColumn.equals("None")) {
+                preparedStatement.setString(1, aValue);
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
             List<TrainBasicView> trainBasicViews = new ArrayList<>();
             while (resultSet.next()) {
                 trainBasicViews.add(mapToTrainBasicView(resultSet));
             }
             return trainBasicViews;
+
         } catch (SQLException e) {
             throw new DataAccessException("Train basic view could not be loaded", e);
         }

@@ -28,7 +28,7 @@ public class TrainService {   //obluzne sluzby, ktere bude volat(pouzivat) contr
         char[] originalPassword = personCreateView.getPwd();
         char[] hashedPassword = hashPassword(originalPassword);
         personCreateView.setPwd(hashedPassword);
-*/
+    */
         trainRepository.createTrain(trainCreateView);
 
     }
@@ -38,8 +38,8 @@ public class TrainService {   //obluzne sluzby, ktere bude volat(pouzivat) contr
         trainRepository.editTrain(trainEditView);
     }
 
-    public List<TrainBasicView> getTrainBasicView() {  //vezme veci z repozitare a posle je dal do gui
-        return trainRepository.getTrainBasicView();
+    public List<TrainBasicView> getTrainBasicView(String aColumn, String aValue) {  //vezme veci z repozitare a posle je dal do gui
+        return trainRepository.getTrainBasicView(aColumn, aValue);
     }
 
 

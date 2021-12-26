@@ -1,10 +1,14 @@
+
 module org.but.feec.traintransportmanagement {
     requires javafx.controls;
+
     requires javafx.fxml;
     requires org.slf4j;
+
     requires fontawesomefx;
     requires org.controlsfx.controls;
     requires java.sql;
+
     requires com.zaxxer.hikari;
     requires bcrypt;
 

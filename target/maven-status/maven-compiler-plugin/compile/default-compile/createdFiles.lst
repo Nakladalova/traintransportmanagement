@@ -4,6 +4,8 @@ org\but\feec\traintransportmanagement\api\TrainCreateView.class
 org\but\feec\traintransportmanagement\config\DataSourceConfig.class
 org\but\feec\traintransportmanagement\controllers\HelloController.class
 org\but\feec\traintransportmanagement\services\TrainService.class
+org\but\feec\traintransportmanagement\controllers\FindUserIdController.class
+org\but\feec\traintransportmanagement\services\UserService.class
 org\but\feec\traintransportmanagement\api\TrainDetailView.class
 org\but\feec\traintransportmanagement\api\TrainBasicView.class
 org\but\feec\traintransportmanagement\controllers\TrainCreateController$1.class
@@ -15,6 +17,7 @@ org\but\feec\traintransportmanagement\controllers\TrainDetailViewController.clas
 org\but\feec\traintransportmanagement\controllers\TrainEditController.class
 org\but\feec\traintransportmanagement\controllers\LoginController$1.class
 org\but\feec\traintransportmanagement\controllers\LoginController.class
+org\but\feec\traintransportmanagement\api\UserView.class
 org\but\feec\traintransportmanagement\services\AuthService.class
 org\but\feec\traintransportmanagement\api\TrainEditView.class
 org\but\feec\traintransportmanagement\controllers\TrainCreateController.class
@@ -23,3 +26,4 @@ org\but\feec\traintransportmanagement\exceptions\DataAccessException.class
 org\but\feec\traintransportmanagement\data\TrainRepository.class
 org\but\feec\traintransportmanagement\data\PersonRepository.class
 org\but\feec\traintransportmanagement\api\PersonAuthView.class
+org\but\feec\traintransportmanagement\data\UserRepository.class

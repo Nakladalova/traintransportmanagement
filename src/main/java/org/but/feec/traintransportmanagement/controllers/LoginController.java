@@ -5,7 +5,6 @@ import org.but.feec.traintransportmanagement.App;
 import org.but.feec.traintransportmanagement.data.PersonRepository;
 import org.but.feec.traintransportmanagement.data.TrainRepository;
 import org.but.feec.traintransportmanagement.exceptions.DataAccessException;
-import org.but.feec.traintransportmanagement.exceptions.ExceptionHandler;
 import org.but.feec.traintransportmanagement.exceptions.ResourceNotFoundException;
 import org.but.feec.traintransportmanagement.services.AuthService;
 import de.jensd.fx.glyphs.GlyphsDude;
