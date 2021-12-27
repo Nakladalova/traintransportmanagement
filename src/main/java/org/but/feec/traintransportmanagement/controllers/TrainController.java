@@ -33,7 +33,7 @@ public class TrainController {
 
     private static final Logger logger = LoggerFactory.getLogger(TrainController.class);
 
-    ObservableList<String>columnNamesList = FXCollections.observableArrayList("Train name", "Speed", "Type");
+    ObservableList<String>columnNamesList = FXCollections.observableArrayList("None","train_name", "speed", "type");
     @FXML
     private TableView<TrainBasicView> systemTrainTableView;
     @FXML
@@ -157,7 +157,8 @@ public class TrainController {
     private ObservableList<TrainBasicView> initializeTrainsData() {
         String selectedItem= (String)trainColumnsComboBox.getSelectionModel().getSelectedItem();
         String value= valueTextField.getText();
-        if (selectedItem == "None") {
+        if (selectedItem == null || selectedItem == "None") {
+            selectedItem = "None";
             value = null;
         }
         List<TrainBasicView> trains = trainService.getTrainBasicView(selectedItem, value);

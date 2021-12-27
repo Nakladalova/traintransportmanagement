@@ -16,6 +16,7 @@ public class TrainRepository {
     public List<TrainBasicView> getTrainBasicView(String aColumn, String aValue) {
         String sqltext = "SELECT id, train_name, speed, type FROM public.train ";
         if (!aColumn.equals("None")) {
+            sqltext += " WHERE ";
             sqltext += aColumn;
             sqltext += " = ?";
         }
