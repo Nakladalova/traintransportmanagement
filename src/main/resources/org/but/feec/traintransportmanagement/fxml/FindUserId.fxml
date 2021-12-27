@@ -49,7 +49,6 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-            <TextArea prefHeight="200.0" prefWidth="200.0" />
             <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
             </children>

@@ -58,8 +58,10 @@ public class TrainController {
     public Button filterButton;
     @FXML
     public Button resetFilterButton;
+    @FXML
+    public Button addCrewButton;
 
-
+    Long trainId;
 
     private TrainRepository trainRepository;
     private TrainService trainService;
@@ -94,6 +96,7 @@ public class TrainController {
     private void initializeTableViewSelection() {
         MenuItem edit = new MenuItem("Edit train");
         MenuItem detailedView = new MenuItem("Detailed train view");
+        MenuItem addDriversCrew = new MenuItem("Add drivers crew");
         edit.setOnAction((ActionEvent event) -> {
             TrainBasicView trainView = systemTrainTableView.getSelectionModel().getSelectedItem();
             try {
@@ -144,9 +147,39 @@ public class TrainController {
             }
         });
 
+        addDriversCrew.setOnAction((ActionEvent event) -> {
+            TrainBasicView trainView = systemTrainTableView.getSelectionModel().getSelectedItem();
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(App.class.getResource("fxml/AddCrew.fxml"));
+                Stage stage = new Stage();
+
+                Long trainId = trainView.getId();
+                stage.setUserData(trainId);
+                stage.setTitle("BDS JavaFX Add Crew");
+
+                AddCrewController controller = new AddCrewController();
+                controller.setStage(stage);
+                fxmlLoader.setController(controller);
+
+                Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+
+                stage.setScene(scene);
+
+                stage.show();
+            } catch (IOException ex) {
+                ExceptionHandler.handleException(ex);
+            }
+        });
+
         ContextMenu menu = new ContextMenu();
+        menu.getItems().addAll(edit, detailedView, addDriversCrew);
+/*
         menu.getItems().add(edit);
-        menu.getItems().addAll(detailedView);
+        menu.getItems().add(detailedView);
+        menu.getItems().add(addDriversCrew);
+
+ */
         systemTrainTableView.setContextMenu(menu);
     }
 
@@ -190,6 +223,25 @@ public class TrainController {
         valueTextField.clear();
         filterData();
     }
+    public void handleAddCrewButton(ActionEvent actionEvent) {
+        TrainBasicView trainView = systemTrainTableView.getSelectionModel().getSelectedItem();
+        try {
+            trainId = trainView.getId();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(App.class.getResource("fxml/AddCrew.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+            Stage stage = new Stage();
+            stage.setTitle("BDS JavaFX Add Crew");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            ExceptionHandler.handleException(ex);
+        }
+    }
+
+    public Long getTrainsId(){
+        return trainId;
+    }
 
     public void handleAddTrainButton(ActionEvent actionEvent) {
         try {
@@ -218,6 +270,7 @@ public class TrainController {
             ExceptionHandler.handleException(ex);
         }
     }
+
 
     @FXML
     protected void onRefreshButtonClick(ActionEvent event) {

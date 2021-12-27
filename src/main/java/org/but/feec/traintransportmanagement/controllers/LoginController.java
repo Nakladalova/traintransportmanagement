@@ -134,7 +134,7 @@ public class LoginController {
             stageOld.close();
 
             stage.getIcons().add(new Image(App.class.getResourceAsStream("logos/vut.jpg")));
-            authConfirmDialog();
+            //authConfirmDialog();
 
             stage.show();
         } catch (IOException ex) {

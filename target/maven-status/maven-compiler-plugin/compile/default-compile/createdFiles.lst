@@ -2,6 +2,7 @@ org\but\feec\traintransportmanagement\exceptions\ResourceNotFoundException.class
 org\but\feec\traintransportmanagement\Main.class
 org\but\feec\traintransportmanagement\api\TrainCreateView.class
 org\but\feec\traintransportmanagement\config\DataSourceConfig.class
+org\but\feec\traintransportmanagement\controllers\AddCrewController.class
 org\but\feec\traintransportmanagement\controllers\HelloController.class
 org\but\feec\traintransportmanagement\services\TrainService.class
 org\but\feec\traintransportmanagement\controllers\FindUserIdController.class

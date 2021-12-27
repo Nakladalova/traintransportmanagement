@@ -4,6 +4,7 @@ C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanage
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\data\PersonRepository.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\services\UserService.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\data\UserRepository.java
+C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\controllers\AddCrewController.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\api\UserView.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\data\TrainRepository.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\controllers\TrainCreateController.java
@@ -12,7 +13,6 @@ C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanage
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\controllers\TrainDetailViewController.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\controllers\TrainEditController.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\services\AuthService.java
-C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\controllers\UserController.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\controllers\HelloController.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\controllers\LoginController.java
 C:\FEKT\traintransportmanagement\src\main\java\org\but\feec\traintransportmanagement\api\TrainEditView.java

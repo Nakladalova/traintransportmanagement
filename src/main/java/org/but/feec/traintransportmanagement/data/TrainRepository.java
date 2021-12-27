@@ -57,6 +57,26 @@ public class TrainRepository {
         }
         return null;
     }
+
+    /*public boolean findEngineDriver(String email) {
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT e.id " +
+                             " FROM public.engine_driver e" +
+                             " JOIN public.depo d ON d.id=t.depo_id" +
+                             " WHERE e.email=?")
+        ) {
+            preparedStatement.setString(1, email);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Find engine driver by email failed failed.", e);
+        }
+        return false;
+    }*/
     public void editTrain(TrainEditView trainEditView) {
         String insertTrainSQL = "UPDATE public.train t SET train_name = ?, speed = ?, type = ? WHERE t.id = ?";
         String checkIfExists = "SELECT train_name FROM public.train t WHERE t.id = ?";

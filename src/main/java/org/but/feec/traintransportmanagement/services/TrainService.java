@@ -23,6 +23,8 @@ public class TrainService {   //obluzne sluzby, ktere bude volat(pouzivat) contr
 
 
 
+
+
     public void createTrain(TrainCreateView trainCreateView) {
      /*
         char[] originalPassword = personCreateView.getPwd();
