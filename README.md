@@ -3,8 +3,10 @@
 The goal of the project was to create a user-friendly application with a graphical interface that can be run from the command line.
 The application is connected to the train-transport-management database and contains information about trains.
 
-You can compile the project with command:  mvn clean install
+You can compile the project with command: 
+mvn clean install
 and run the project with:
+
 java -jar target/traintransportmanagement-1.0.0.jar
 
 In pom.xml file was added these dependencies:
