@@ -61,6 +61,8 @@ public class AddCrewController {
             trainId = (Long)stage.getUserData();
         }
 
+        logger.info("AddCrewController initialized");
+
     }
 
 
@@ -158,65 +160,7 @@ public class AddCrewController {
     }
 }
 
-        /*else{
-            try (Connection connection = DataSourceConfig.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(
-                         "UPDATE public.engine_driver " +
-                                 " SET train_id= ?" +
-                                 " WHERE id= ?")
 
-            ) {
-                preparedStatement.setLong(1, trainsId);
-                preparedStatement.setLong(2, engineDriver1Id );
-                try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        engineDriver2Id=resultSet.getInt("id");
-                        messageBox2.setText("Engine driver was found");
-                    }
-                    else{
-                        messageBox2.setText("Engine driver was not found.\n Enter new engine driver");
-                    }
-                }
-            } catch (SQLException e) {
-                messageBox2.setText("Engine driver was not found.");
-                throw new DataAccessException("Find engine driver by email failed.", e);
-            }
-
-
-        }*/
-
-/*String insertEngineDriverIdSQL = "UPDATE public.engine_driver SET train_id=? WHERE id=?";
-            //String checkIfExists = "SELECT email FROM public.engine_driver t WHERE id = ?";
-            try (Connection connection = DataSourceConfig.getConnection();
-                 // would be beneficial if I will return the created entity back
-                 PreparedStatement preparedStatement = connection.prepareStatement(insertEngineDriverIdSQL, Statement.RETURN_GENERATED_KEYS)) {
-                // set prepared statement variables
-                preparedStatement.setLong(1, trainId);
-                preparedStatement.setInt(2, engineDriver1Id);
-                try {
-                    connection.setAutoCommit(false);
-                    try (PreparedStatement ps = connection.prepareStatement(checkIfExists, Statement.RETURN_GENERATED_KEYS)) {
-                        ps.setLong(1, engineDriver1Id);
-                        ps.execute();
-                    } catch (SQLException e) {
-                        throw new DataAccessException("Engine driver for edit do not exist.");
-                    }
-
-                    int affectedRows = preparedStatement.executeUpdate();
-                    if (affectedRows == 0) {
-                        throw new DataAccessException("Updating engine driver failed, no rows affected.");
-                    }
-                    resultMessageBox.setText("Engine driver was added");
-                    connection.commit();
-                } catch (SQLException e) {
-                    connection.rollback();
-                } finally {
-                    connection.setAutoCommit(true);
-                }
-            } catch (SQLException e) {
-                throw new DataAccessException("Updating engine driver failed operation on the database failed.");
-            }
-*/
 
 
 

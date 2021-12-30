@@ -109,8 +109,8 @@ public class LoginController {
         String password = passwordTextField.getText();
 
         try {
-            //boolean authenticated = authService.authenticate(username, password);
-            boolean authenticated=true;
+            boolean authenticated = authService.authenticate(username, password);
+            //boolean authenticated=true;
             if (authenticated) {
                 showTrainsView();
             } else {

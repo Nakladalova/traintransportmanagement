@@ -2,17 +2,9 @@ package org.but.feec.traintransportmanagement.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import org.but.feec.traintransportmanagement.App;
-import org.but.feec.traintransportmanagement.api.UserView;
-import org.but.feec.traintransportmanagement.data.UserRepository;
-import org.but.feec.traintransportmanagement.exceptions.ExceptionHandler;
-import org.but.feec.traintransportmanagement.services.UserService;
 import org.controlsfx.validation.ValidationSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +13,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.but.feec.traintransportmanagement.api.*;
+import org.but.feec.traintransportmanagement.data.UserRepository;
+import org.but.feec.traintransportmanagement.services.UserService;
 import org.but.feec.traintransportmanagement.config.DataSourceConfig;
 import org.but.feec.traintransportmanagement.exceptions.DataAccessException;
-
-import java.io.IOException;
 
 public class FindUserIdController {
     private static final Logger logger = LoggerFactory.getLogger(FindUserIdController.class);

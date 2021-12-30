@@ -279,7 +279,7 @@ public class TrainController {
             fxmlLoader.setLocation(App.class.getResource("fxml/TrainCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
-            stage.setTitle("BDS JavaFX Find User");
+            stage.setTitle("BDS JavaFX Add Train");
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
