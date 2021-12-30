@@ -11,6 +11,7 @@ and run the project with:
 
 java -jar target/traintransportmanagement-1.0.0.jar
 
+
 In pom.xml file was added these dependencies:
 
 <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
