@@ -125,7 +125,7 @@ public class LoginController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(App.class.getResource("fxml/Trains.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1050, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 610, 700);
             Stage stage = new Stage();
             stage.setTitle("BDS JavaFX Train App");
             stage.setScene(scene);

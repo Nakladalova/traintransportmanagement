@@ -101,7 +101,7 @@ public class TrainRepository {
                 int affectedRows = preparedStatement.executeUpdate();
 
                 if (affectedRows == 0) {
-                    throw new DataAccessException("Creating train failed, no rows affected.");
+                    throw new DataAccessException("Edit train failed, no rows affected.");
                 }
                 connection.commit();
             } catch (SQLException e) {
@@ -110,7 +110,7 @@ public class TrainRepository {
                 connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
-            throw new DataAccessException("Creating train failed operation on the database failed.");
+            throw new DataAccessException("Edits train failed operation on the database failed.");
         }
     }
 

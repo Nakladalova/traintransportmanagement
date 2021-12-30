@@ -46,7 +46,7 @@
                 </Label>
                 <TextArea fx:id="messageBox1" layoutX="40.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="51.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextArea fx:id="messageBox2" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <TextArea fx:id="resultMessageBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <TextArea fx:id="resultMessageBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
             </children>
         </GridPane>

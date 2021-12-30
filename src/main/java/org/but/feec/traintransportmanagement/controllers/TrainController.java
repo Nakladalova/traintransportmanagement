@@ -1,5 +1,8 @@
 package org.but.feec.traintransportmanagement.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
@@ -10,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import org.but.feec.traintransportmanagement.config.DataSourceConfig;
 import org.but.feec.traintransportmanagement.exceptions.DataAccessException;
 import org.but.feec.traintransportmanagement.exceptions.ExceptionHandler;
@@ -23,11 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import java.util.Optional;
 
 public class TrainController {
 
@@ -62,7 +64,7 @@ public class TrainController {
     public Button addCrewButton;
 
     Long trainId;
-
+    Boolean deleteTrainConfirm=false;
     private TrainRepository trainRepository;
     private TrainService trainService;
 
@@ -97,6 +99,7 @@ public class TrainController {
         MenuItem edit = new MenuItem("Edit train");
         MenuItem detailedView = new MenuItem("Detailed train view");
         MenuItem addDriversCrew = new MenuItem("Add drivers crew");
+        MenuItem deleteTrain = new MenuItem("Delete train");
         edit.setOnAction((ActionEvent event) -> {
             TrainBasicView trainView = systemTrainTableView.getSelectionModel().getSelectedItem();
             try {
@@ -172,8 +175,35 @@ public class TrainController {
             }
         });
 
+        deleteTrain.setOnAction((ActionEvent event) -> {
+            TrainBasicView trainView = systemTrainTableView.getSelectionModel().getSelectedItem();
+            Long trainId = trainView.getId();
+            confirmDialog();
+            if(deleteTrainConfirm==true) {
+                String deleteTrainById = "DELETE FROM public.train WHERE id=?";
+                try (Connection connection = DataSourceConfig.getConnection();
+                     PreparedStatement preparedStatement = connection.prepareStatement(deleteTrainById, Statement.RETURN_GENERATED_KEYS);
+                ) {
+                    preparedStatement.setLong(1, trainId);
+                    try {
+                        preparedStatement.executeUpdate();
+                    } catch (SQLException e) {
+                        throw new DataAccessException("Train was not deleted. Failed operation on database ", e);
+                    } catch (DataAccessException e) {
+                    }
+                } catch (SQLException e) {
+                    throw new DataAccessException("Updating engine driver failed operation on the database failed.");
+                }
+                confirmDialogDeleted();
+            }
+            else{
+
+            }
+
+        });
+
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll(edit, detailedView, addDriversCrew);
+        menu.getItems().addAll(edit, detailedView, addDriversCrew, deleteTrain);
 /*
         menu.getItems().add(edit);
         menu.getItems().add(detailedView);
@@ -246,7 +276,7 @@ public class TrainController {
     public void handleAddTrainButton(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("fxml/FindUser.fxml"));
+            fxmlLoader.setLocation(App.class.getResource("fxml/TrainCreate.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
             stage.setTitle("BDS JavaFX Find User");
@@ -271,9 +301,63 @@ public class TrainController {
         }
     }
 
-
     @FXML
     protected void onRefreshButtonClick(ActionEvent event) {
         filterData();
     }
+
+    private void confirmDialog() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Delete confirmation");
+        alert.setHeaderText("Do you really want to delete train?");
+
+        Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(20), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                alert.setResult(ButtonType.CANCEL);
+                deleteTrainConfirm=false;
+                alert.hide();
+            }
+        }));
+        idlestage.setCycleCount(1);
+        idlestage.play();
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            deleteTrainConfirm=true;
+            System.out.println("ok clicked");
+        } else if (result.get() == ButtonType.CANCEL) {
+            deleteTrainConfirm=false;
+            System.out.println("cancel clicked");
+        }
+    }
+
+    private void confirmDialogDeleted() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete confirmation");
+        alert.setHeaderText("Train was deleted. Press refresh");
+
+        Timeline idlestage = new Timeline(new KeyFrame(Duration.seconds(4), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                alert.setResult(ButtonType.CANCEL);
+                alert.hide();
+            }
+        }));
+        idlestage.setCycleCount(1);
+        idlestage.play();
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            System.out.println("ok clicked");
+        } else if (result.get() == ButtonType.CANCEL) {
+            System.out.println("cancel clicked");
+        }
+    }
+
+
 }

@@ -11,6 +11,7 @@ org\but\feec\traintransportmanagement\api\TrainDetailView.class
 org\but\feec\traintransportmanagement\api\TrainBasicView.class
 org\but\feec\traintransportmanagement\controllers\TrainCreateController$1.class
 org\but\feec\traintransportmanagement\App.class
+org\but\feec\traintransportmanagement\controllers\TrainController$1.class
 org\but\feec\traintransportmanagement\controllers\TrainController.class
 org\but\feec\traintransportmanagement\controllers\TrainEditController$1.class
 module-info.class
@@ -23,6 +24,7 @@ org\but\feec\traintransportmanagement\services\AuthService.class
 org\but\feec\traintransportmanagement\api\TrainEditView.class
 org\but\feec\traintransportmanagement\controllers\TrainCreateController.class
 org\but\feec\traintransportmanagement\exceptions\ExceptionHandler.class
+org\but\feec\traintransportmanagement\controllers\TrainController$2.class
 org\but\feec\traintransportmanagement\exceptions\DataAccessException.class
 org\but\feec\traintransportmanagement\data\TrainRepository.class
 org\but\feec\traintransportmanagement\data\PersonRepository.class

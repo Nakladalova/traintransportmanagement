@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.but.feec.traintransportmanagement.App;
@@ -37,6 +38,10 @@ public class FindUserIdController {
     private TextField userId;
     @FXML
     private TextField userName;
+    @FXML
+    private TextArea userNameTextArea;
+    @FXML
+    public Button findUserSQLInjectionDropTable;
 
     private ValidationSupport validation;
     private UserRepository userRepository;
@@ -56,11 +61,31 @@ public class FindUserIdController {
         logger.info("FindUserController initialized");
     }
 
+    public static Integer tryParse(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
 
     @FXML
     void handleFindUserSecureButton(ActionEvent event) {
         String userIdString = userId.getText();
-        int userIdInt=Integer.parseInt(userIdString);
+        int userIdInt=0;
+        if(tryParse(userIdString)==null){
+            userNameTextArea.setText("error");
+        }
+        else{
+            userIdInt=tryParse(userIdString);;
+        }
+        //int userIdInt=0;
+        /*try{
+            userIdInt=Integer.parseInt(userIdString);
+        } catch (NumberFormatException e) {
+            userNameTextArea.setText("error");
+            //e.printStackTrace();
+        }*/
         String userSurname;
         StringBuffer s = new StringBuffer();
         try (Connection connection = DataSourceConfig.getConnection();
@@ -75,14 +100,16 @@ public class FindUserIdController {
                 while(resultSet.next()) {
                     userSurname=resultSet.getString("surname");
                     s.append(userSurname);
-                    s.append("/");
+                    //s.append("/");
+                    s.append("\n");
                 }
             }
             String userNameFromDatabase=s.toString();
-            userName.setText(userNameFromDatabase);
+            //userName.setText(userNameFromDatabase);
+            userNameTextArea.setText(userNameFromDatabase);
 
         } catch (SQLException e) {
-            userName.setText("error");
+            userNameTextArea.setText("error");
             throw new DataAccessException("Find user by ID failed.", e);
         }
 
@@ -100,25 +127,55 @@ public class FindUserIdController {
                              " WHERE u.id ="+userIdString)
         ) {
 
-            String backLash="/";
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while(resultSet.next()) {
                     userSurname=resultSet.getString("surname");
                     s.append(userSurname);
-                    s.append("/");
+                    //s.append("/");
+                    s.append("\n");
                 }
             }
             String userNameFromDatabase=s.toString();
-            userName.setText(userNameFromDatabase);
+            //userName.setText(userNameFromDatabase);
+            userNameTextArea.setText(userNameFromDatabase);
 
         } catch (SQLException e) {
-            userName.setText("error");
+            userNameTextArea.setText("error");
             throw new DataAccessException("Find user by ID failed.", e);
         }
 
     }
 
+    @FXML
+    void handleFindUserSQLInjectionDropTableButton(ActionEvent event) {
+        String userIdString = userId.getText();
+        String userSurname;
+        StringBuffer s = new StringBuffer();
+        try (Connection connection = DataSourceConfig.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT surname" +
+                             " FROM public.sql_injection_table2 u" +
+                             " WHERE u.id ="+userIdString)
+        ) {
 
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while(resultSet.next()) {
+                    userSurname=resultSet.getString("surname");
+                    s.append(userSurname);
+                    //s.append("/");
+                    s.append("\n");
+                }
+            }
+            String userNameFromDatabase=s.toString();
+            //userName.setText(userNameFromDatabase);
+            userNameTextArea.setText(userNameFromDatabase);
+
+        } catch (SQLException e) {
+            userNameTextArea.setText("error");
+            throw new DataAccessException("Find user by ID failed.", e);
+        }
+
+    }
 
 
 }

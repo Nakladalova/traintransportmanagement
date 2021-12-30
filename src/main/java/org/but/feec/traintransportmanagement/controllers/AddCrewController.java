@@ -117,11 +117,10 @@ public class AddCrewController {
 
     public void handleAddEngineDriversButton(ActionEvent actionEvent) {;
         if((engineDriver1Id==0) || (engineDriver2Id==0)){
-            resultMessageBox.setText("Type engine driver's surname and click button find engine driver. Engine drivers were not added.");
+            resultMessageBox.setText("Type engine driver's surname and click button find engine driver.\nEngine drivers were not added.");
 
         }
         else{
-
             String changeTrainIdToEngineDriver = "UPDATE public.engine_driver SET train_id=? WHERE id=?";
             try (Connection connection = DataSourceConfig.getConnection();
                  PreparedStatement preparedStatement1 = connection.prepareStatement(changeTrainIdToEngineDriver, Statement.RETURN_GENERATED_KEYS);
@@ -141,9 +140,12 @@ public class AddCrewController {
                     if (affectedRows == 0) {
                         throw new DataAccessException("Updating engine driver 2 failed, no rows affected.");
                     }
-                    resultMessageBox.setText("Engine crew was added to the selected train.");
                     connection.commit();
+                    resultMessageBox.setText("Engine crew was added to the selected train.");
                 } catch (SQLException e) {
+                    connection.rollback();
+                } catch (DataAccessException e) {
+                    resultMessageBox.setText("Engine crew was NOT added to the selected train.\nTransaction is being rolled back");
                     connection.rollback();
                 } finally {
                     connection.setAutoCommit(true);

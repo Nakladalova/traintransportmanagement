@@ -28,33 +28,26 @@
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-                <Label text="User  " GridPane.rowIndex="2">
-                    <padding>
-                        <Insets left="5.0" />
-                    </padding>
-                </Label>
-                <Label text="user name " GridPane.rowIndex="4">
+                <Label text="User name " GridPane.rowIndex="3">
                     <padding>
                         <Insets left="5.0" />
                     </padding>
                 </Label>
                 <TextField fx:id="userId" GridPane.columnIndex="1" />
-                <TextField fx:id="userName" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="" GridPane.rowIndex="5">
                     <GridPane.margin>
                         <Insets />
-
                     </GridPane.margin>
                     <padding>
                         <Insets left="5.0" />
                     </padding>
                 </Label>
-            <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
+            <TextArea fx:id="userNameTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
         </GridPane>
-        <Button fx:id="findUserSecure" layoutX="140.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleFindUserSecureButton" text="find user secure" />
-        <Button fx:id="findUserSQLInjection" layoutX="280.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleFindUserSQLInjectionButton" text="find user sql injection" />
+        <Button fx:id="findUserSecure" layoutX="120.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleFindUserSecureButton" text="find user secure" />
+        <Button fx:id="findUserSQLInjection" layoutX="250.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleFindUserSQLInjectionButton" text="find user sql injection" />
+        <Button fx:id="findUserSQLInjectionDropTable" layoutX="405.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleFindUserSQLInjectionDropTableButton" text="find user sql injection drop table" />
     </children>
 
 </AnchorPane>
